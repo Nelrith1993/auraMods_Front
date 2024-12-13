@@ -5,7 +5,7 @@ import SectionTitle from './SectionTitle.vue';
 <template>
     <div class="md:grid md:grid-cols-3 md:gap-6">
         <SectionTitle>
-            <template #title>
+            <template #title class="">
                 <slot name="title" />
             </template>
             <template #description>
@@ -14,7 +14,7 @@ import SectionTitle from './SectionTitle.vue';
         </SectionTitle>
 
         <div class="mt-5 md:mt-0 md:col-span-2">
-            <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
+            <div class="px-4 py-5 shadow sm:p-6 border-neutral-900 isolate bg-black/50 ring-1 ring-black/5 sm:rounded-lg">
                 <slot name="content" />
             </div>
         </div>

@@ -1,12 +1,12 @@
 <script setup>
 import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
-import ActionMessage from '@/Components/ActionMessage.vue';
-import FormSection from '@/Components/FormSection.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+import ActionMessage from '@/Components/varios/ActionMessage.vue';
+import FormSection from '@/Components/varios/FormSection.vue';
+import InputError from '@/Components/varios/InputError.vue';
+import InputLabel from '@/Components/varios/InputLabel.vue';
+import PrimaryButton from '@/Components/varios/PrimaryButton.vue';
+import TextInput from '@/Components/varios/TextInput.vue';
 
 const passwordInput = ref(null);
 const currentPasswordInput = ref(null);
@@ -40,60 +40,47 @@ const updatePassword = () => {
 <template>
     <FormSection @submitted="updatePassword">
         <template #title>
-            Update Password
+            <div class="underline text-neutral-200 underline-offset-2">
+                Actualizar contraseña
+            </div>
         </template>
 
         <template #description>
-            Ensure your account is using a long, random password to stay secure.
+            <div class="text-neutral-400">
+                Asegurate de que tu cuenta esté usando una contraseña, larga y aleatoria para estar segura.
+            </div>
         </template>
 
         <template #form>
             <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="current_password" value="Current Password" />
-                <TextInput
-                    id="current_password"
-                    ref="currentPasswordInput"
-                    v-model="form.current_password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    autocomplete="current-password"
-                />
+                <InputLabel for="current_password" value="Current Password" class="text-white ms-2" />
+                <TextInput id="current_password" ref="currentPasswordInput" v-model="form.current_password"
+                    type="password" class="block w-full mt-1" autocomplete="current-password" />
                 <InputError :message="form.errors.current_password" class="mt-2" />
             </div>
 
             <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="password" value="New Password" />
-                <TextInput
-                    id="password"
-                    ref="passwordInput"
-                    v-model="form.password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    autocomplete="new-password"
-                />
+                <InputLabel for="password" value="New Password" class="text-white ms-2" />
+                <TextInput id="password" ref="passwordInput" v-model="form.password" type="password"
+                    class="block w-full mt-1" autocomplete="new-password" />
                 <InputError :message="form.errors.password" class="mt-2" />
             </div>
 
             <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="password_confirmation" value="Confirm Password" />
-                <TextInput
-                    id="password_confirmation"
-                    v-model="form.password_confirmation"
-                    type="password"
-                    class="mt-1 block w-full"
-                    autocomplete="new-password"
-                />
+                <InputLabel for="password_confirmation" value="Confirm Password" class="text-white ms-2" />
+                <TextInput id="password_confirmation" v-model="form.password_confirmation" type="password"
+                    class="block w-full mt-1" autocomplete="new-password" />
                 <InputError :message="form.errors.password_confirmation" class="mt-2" />
             </div>
         </template>
 
         <template #actions>
             <ActionMessage :on="form.recentlySuccessful" class="me-3">
-                Saved.
+                Guardado.
             </ActionMessage>
 
             <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Save
+                Guardar
             </PrimaryButton>
         </template>
     </FormSection>

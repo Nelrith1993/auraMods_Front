@@ -1,19 +1,19 @@
 <script setup>
 import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
-import ActionMessage from '@/Components/ActionMessage.vue';
-import ActionSection from '@/Components/ActionSection.vue';
-import Checkbox from '@/Components/Checkbox.vue';
-import ConfirmationModal from '@/Components/ConfirmationModal.vue';
-import DangerButton from '@/Components/DangerButton.vue';
-import DialogModal from '@/Components/DialogModal.vue';
-import FormSection from '@/Components/FormSection.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
-import SectionBorder from '@/Components/SectionBorder.vue';
-import TextInput from '@/Components/TextInput.vue';
+import ActionMessage from '@/Components/varios/ActionMessage.vue';
+import ActionSection from '@/Components/varios/ActionSection.vue';
+import Checkbox from '@/Components/varios/Checkbox.vue';
+import ConfirmationModal from '@/Components/varios/ConfirmationModal.vue';
+import DangerButton from '@/Components/varios/DangerButton.vue';
+import DialogModal from '@/Components/varios/DialogModal.vue';
+import FormSection from '@/Components/varios/FormSection.vue';
+import InputError from '@/Components/varios/InputError.vue';
+import InputLabel from '@/Components/varios/InputLabel.vue';
+import PrimaryButton from '@/Components/varios/PrimaryButton.vue';
+import SecondaryButton from '@/Components/varios/SecondaryButton.vue';
+import SectionBorder from '@/Components/varios/SectionBorder.vue';
+import TextInput from '@/Components/varios/TextInput.vue';
 
 const props = defineProps({
     tokens: Array,
@@ -92,7 +92,7 @@ const deleteApiToken = () => {
                         id="name"
                         v-model="createApiTokenForm.name"
                         type="text"
-                        class="mt-1 block w-full"
+                        class="block w-full mt-1"
                         autofocus
                     />
                     <InputError :message="createApiTokenForm.errors.name" class="mt-2" />
@@ -102,11 +102,11 @@ const deleteApiToken = () => {
                 <div v-if="availablePermissions.length > 0" class="col-span-6">
                     <InputLabel for="permissions" value="Permissions" />
 
-                    <div class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 gap-4 mt-2 md:grid-cols-2">
                         <div v-for="permission in availablePermissions" :key="permission">
                             <label class="flex items-center">
                                 <Checkbox v-model:checked="createApiTokenForm.permissions" :value="permission" />
-                                <span class="ms-2 text-sm text-gray-600">{{ permission }}</span>
+                                <span class="text-sm text-gray-600 ms-2">{{ permission }}</span>
                             </label>
                         </div>
                     </div>
@@ -153,13 +153,13 @@ const deleteApiToken = () => {
 
                                     <button
                                         v-if="availablePermissions.length > 0"
-                                        class="cursor-pointer ms-6 text-sm text-gray-400 underline"
+                                        class="text-sm text-gray-400 underline cursor-pointer ms-6"
                                         @click="manageApiTokenPermissions(token)"
                                     >
                                         Permissions
                                     </button>
 
-                                    <button class="cursor-pointer ms-6 text-sm text-red-500" @click="confirmApiTokenDeletion(token)">
+                                    <button class="text-sm text-red-500 cursor-pointer ms-6" @click="confirmApiTokenDeletion(token)">
                                         Delete
                                     </button>
                                 </div>
@@ -181,7 +181,7 @@ const deleteApiToken = () => {
                     Please copy your new API token. For your security, it won't be shown again.
                 </div>
 
-                <div v-if="$page.props.jetstream.flash.token" class="mt-4 bg-gray-100 px-4 py-2 rounded font-mono text-sm text-gray-500 break-all">
+                <div v-if="$page.props.jetstream.flash.token" class="px-4 py-2 mt-4 font-mono text-sm text-gray-500 break-all bg-gray-100 rounded">
                     {{ $page.props.jetstream.flash.token }}
                 </div>
             </template>
@@ -200,11 +200,11 @@ const deleteApiToken = () => {
             </template>
 
             <template #content>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div v-for="permission in availablePermissions" :key="permission">
                         <label class="flex items-center">
                             <Checkbox v-model:checked="updateApiTokenForm.permissions" :value="permission" />
-                            <span class="ms-2 text-sm text-gray-600">{{ permission }}</span>
+                            <span class="text-sm text-gray-600 ms-2">{{ permission }}</span>
                         </label>
                     </div>
                 </div>

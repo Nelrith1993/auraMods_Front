@@ -1,13 +1,13 @@
 <script setup>
 import { ref } from 'vue';
 import { Link, router, useForm } from '@inertiajs/vue3';
-import ActionMessage from '@/Components/ActionMessage.vue';
-import FormSection from '@/Components/FormSection.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+import ActionMessage from '@/Components/varios/ActionMessage.vue';
+import FormSection from '@/Components/varios/FormSection.vue';
+import InputError from '@/Components/varios/InputError.vue';
+import InputLabel from '@/Components/varios/InputLabel.vue';
+import PrimaryButton from '@/Components/varios/PrimaryButton.vue';
+import SecondaryButton from '@/Components/varios/SecondaryButton.vue';
+import TextInput from '@/Components/varios/TextInput.vue';
 
 const props = defineProps({
     user: Object,
@@ -78,11 +78,15 @@ const clearPhotoFileInput = () => {
 <template>
     <FormSection @submitted="updateProfileInformation">
         <template #title>
-            Profile Information
+            <div class="underline text-neutral-200 underline-offset-2">
+                Información del perfil
+            </div>
         </template>
 
         <template #description>
-            Update your account's profile information and email address.
+            <div class="text-neutral-400">
+                Actualiza la información de tu perfil y el correo electrónico.
+            </div>
         </template>
 
         <template #form>
@@ -101,13 +105,13 @@ const clearPhotoFileInput = () => {
 
                 <!-- Current Profile Photo -->
                 <div v-show="! photoPreview" class="mt-2">
-                    <img :src="user.profile_photo_url" :alt="user.name" class="rounded-full size-20 object-cover">
+                    <img :src="user.profile_photo_url" :alt="user.name" class="object-cover rounded-full size-20">
                 </div>
 
                 <!-- New Profile Photo Preview -->
                 <div v-show="photoPreview" class="mt-2">
                     <span
-                        class="block rounded-full size-20 bg-cover bg-no-repeat bg-center"
+                        class="block bg-center bg-no-repeat bg-cover rounded-full size-20"
                         :style="'background-image: url(\'' + photoPreview + '\');'"
                     />
                 </div>
@@ -130,12 +134,12 @@ const clearPhotoFileInput = () => {
 
             <!-- Name -->
             <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="name" value="Name" class="text-white ms-2"/>
                 <TextInput
                     id="name"
                     v-model="form.name"
                     type="text"
-                    class="mt-1 block w-full"
+                    class="block w-full mt-1"
                     required
                     autocomplete="name"
                 />
@@ -144,34 +148,34 @@ const clearPhotoFileInput = () => {
 
             <!-- Email -->
             <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="email" value="Email" />
+                <InputLabel for="email" value="Email" class="text-white ms-2"/>
                 <TextInput
                     id="email"
                     v-model="form.email"
                     type="email"
-                    class="mt-1 block w-full"
+                    class="block w-full mt-1"
                     required
                     autocomplete="username"
                 />
                 <InputError :message="form.errors.email" class="mt-2" />
 
                 <div v-if="$page.props.jetstream.hasEmailVerification && user.email_verified_at === null">
-                    <p class="text-sm mt-2">
-                        Your email address is unverified.
+                    <p class="mt-2 text-sm">
+                        El correo está sin verificar.
 
                         <Link
                             :href="route('verification.send')"
                             method="post"
                             as="button"
-                            class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             @click.prevent="sendEmailVerification"
                         >
-                            Click here to re-send the verification email.
+                            Pulsa aquí para reenviar el correo de verificación.
                         </Link>
                     </p>
 
-                    <div v-show="verificationLinkSent" class="mt-2 font-medium text-sm text-green-600">
-                        A new verification link has been sent to your email address.
+                    <div v-show="verificationLinkSent" class="mt-2 text-sm font-medium text-green-600">
+                        Se ha enviado un nuevo enlace de verificación a tu correo.
                     </div>
                 </div>
             </div>
@@ -179,11 +183,11 @@ const clearPhotoFileInput = () => {
 
         <template #actions>
             <ActionMessage :on="form.recentlySuccessful" class="me-3">
-                Saved.
+                Guardado.
             </ActionMessage>
 
             <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Save
+                Guardar
             </PrimaryButton>
         </template>
     </FormSection>

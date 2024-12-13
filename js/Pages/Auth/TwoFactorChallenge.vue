@@ -1,12 +1,12 @@
 <script setup>
 import { nextTick, ref } from 'vue';
 import { Head, useForm } from '@inertiajs/vue3';
-import AuthenticationCard from '@/Components/AuthenticationCard.vue';
-import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+import AuthenticationCard from '@/Components/varios/AuthenticationCard.vue';
+import AuthenticationCardLogo from '@/Components/varios/AuthenticationCardLogo.vue';
+import InputError from '@/Components/varios/InputError.vue';
+import InputLabel from '@/Components/varios/InputLabel.vue';
+import PrimaryButton from '@/Components/varios/PrimaryButton.vue';
+import TextInput from '@/Components/varios/TextInput.vue';
 
 const recovery = ref(false);
 
@@ -47,11 +47,11 @@ const submit = () => {
 
         <div class="mb-4 text-sm text-gray-600">
             <template v-if="! recovery">
-                Please confirm access to your account by entering the authentication code provided by your authenticator application.
+                Porfavor confirma el acceso a tu cuenta ingresando el código de autentificación provisto por la aplicación.
             </template>
 
             <template v-else>
-                Please confirm access to your account by entering one of your emergency recovery codes.
+                Porfavor, confirma el acceso a tu cuenta accediendo a uno de tus códigos de recuperación.
             </template>
         </div>
 
@@ -64,7 +64,7 @@ const submit = () => {
                     v-model="form.code"
                     type="text"
                     inputmode="numeric"
-                    class="mt-1 block w-full"
+                    class="block w-full mt-1"
                     autofocus
                     autocomplete="one-time-code"
                 />
@@ -78,25 +78,25 @@ const submit = () => {
                     ref="recoveryCodeInput"
                     v-model="form.recovery_code"
                     type="text"
-                    class="mt-1 block w-full"
+                    class="block w-full mt-1"
                     autocomplete="one-time-code"
                 />
                 <InputError class="mt-2" :message="form.errors.recovery_code" />
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <button type="button" class="text-sm text-gray-600 hover:text-gray-900 underline cursor-pointer" @click.prevent="toggleRecovery">
+                <button type="button" class="text-sm text-gray-600 underline cursor-pointer hover:text-gray-900" @click.prevent="toggleRecovery">
                     <template v-if="! recovery">
-                        Use a recovery code
+                        Usa un codigo de recuperación.
                     </template>
 
                     <template v-else>
-                        Use an authentication code
+                        Usa un código de autentificación.
                     </template>
                 </button>
 
                 <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Log in
+                    Entrar.
                 </PrimaryButton>
             </div>
         </form>

@@ -1,9 +1,9 @@
 <script setup>
 import { computed } from 'vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
-import AuthenticationCard from '@/Components/AuthenticationCard.vue';
-import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
+import AuthenticationCard from '@/Components/varios/AuthenticationCard.vue';
+import AuthenticationCardLogo from '@/Components/varios/AuthenticationCardLogo.vue';
+import PrimaryButton from '@/Components/varios/PrimaryButton.vue';
 
 const props = defineProps({
     status: String,
@@ -27,33 +27,33 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
         </template>
 
         <div class="mb-4 text-sm text-gray-600">
-            Before continuing, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.
+            Antes de continuar, ¿podria verificar el correo electronico haciendo "Click" en el enlace que le hemos enviado?. Si no ha recivido el email, le enviaremos otro.
         </div>
 
-        <div v-if="verificationLinkSent" class="mb-4 font-medium text-sm text-green-600">
-            A new verification link has been sent to the email address you provided in your profile settings.
+        <div v-if="verificationLinkSent" class="mb-4 text-sm font-medium text-green-600">
+            Un nuevo enlace de verificación ha sido enviado al correo electronico que se muestra en tus ajustes de perfil.
         </div>
 
         <form @submit.prevent="submit">
-            <div class="mt-4 flex items-center justify-between">
+            <div class="flex items-center justify-between mt-4">
                 <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Resend Verification Email
+                    Reenviar el enlace de verificación.
                 </PrimaryButton>
 
                 <div>
                     <Link
                         :href="route('profile.show')"
-                        class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
-                        Edit Profile</Link>
+                        Editar Perfil</Link>
 
                     <Link
                         :href="route('logout')"
                         method="post"
                         as="button"
-                        class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ms-2"
+                        class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ms-2"
                     >
-                        Log Out
+                        Salir
                     </Link>
                 </div>
             </div>
